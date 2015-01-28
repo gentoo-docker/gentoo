@@ -8,19 +8,42 @@ busybox wget "${dist}/${stage3}" -qO- \
     --exclude="./sys/*" \
     -pxjf -
 
-# Setup the rc_sys
-#sed -e 's/#rc_sys=""/rc_sys="lxc"/g' -i /etc/rc.conf
-
-# Setup the net.lo runlevel
-#ln -s /etc/init.d/net.lo /run/openrc/started/net.lo
-
-# Setup the net.eth0 runlevel
-#ln -s /etc/init.d/net.lo /etc/init.d/net.eth0
-#ln -s /etc/init.d/net.eth0 /run/openrc/started/net.eth0
-
-# By default, UTC system
+ebegin "Config timezone"
 echo 'UTC' > /etc/timezone
+eend $?
 
-# Self destruct
+ebegin "Copy make.conf"
+cp /_files/etc/portage/make.conf /etc/portage/make.conf
+eend $?
+
+ebegin "Copy cpu.conf"
+cp /_files/etc/portage/cpu.conf /etc/portage/cpu.conf
+eend $?
+
+ebegin "Remove doc"
+rm -rf /usr/share/doc
+eend $?
+
+ebegin "Remove info"
+rm -rf /usr/share/info
+eend $?
+
+ebegin "Remove man"
+rm -rf /usr/share/man
+eend $?
+
+ebegin "Remove gtk-doc"
+rm -rf /usr/share/gtk-doc
+eend $?
+
+ebegin "Remove _files"
+rm -rf /_files/
+eend $?
+
+ebegin "Remove Dockerfile"
 rm /Dockerfile
+eend $?
+
+ebegin "Remove build.sh"
 rm /build.sh
+eend $?
