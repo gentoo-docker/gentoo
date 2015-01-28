@@ -8,8 +8,6 @@ busybox wget "${dist}/${stage3}" -qO- \
     --exclude="./sys/*" \
     -pxjf -
 
-env-update
-
 echo 'UTC' > /etc/timezone
 
 cp /_files/etc/portage/make.conf /etc/portage/make.conf
