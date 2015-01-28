@@ -8,6 +8,8 @@ busybox wget "${dist}/${stage3}" -qO- \
     --exclude="./sys/*" \
     -pxjf -
 
+env-update
+
 ebegin "Config timezone"
 echo 'UTC' > /etc/timezone
 eend $?
