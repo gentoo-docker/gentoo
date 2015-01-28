@@ -10,6 +10,8 @@ busybox wget "${dist}/${stage3}" -qO- \
 
 env-update
 
+source "${PORTAGE_BIN_PATH:-/usr/lib/portage/bin}/isolated-functions.sh"
+
 ebegin "Config timezone"
 echo 'UTC' > /etc/timezone
 eend $?
